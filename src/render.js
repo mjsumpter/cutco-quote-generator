@@ -43,6 +43,7 @@ function generateTable(productsArray) {
                     <label for="red">Red</label></td>
                     <td>${product.price}</td>
                     <td>${product.priceFull}</td>
+                    <td><button class="freebtn">+</button></td>
                   </tr>
                     `
     }

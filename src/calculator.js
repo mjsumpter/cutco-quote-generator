@@ -1,5 +1,9 @@
 var inputs = document.querySelectorAll('input[type=number]');
+var totalHtml = document.querySelector('#totalCount');
+var freeHtml = document.querySelector('#freeGiftCount');
+var freeBtns = document.querySelectorAll('.freebtn');
 
+// check box when value of product is over 1
 for(let i = 0; i < inputs.length; i++)
 {
     inputs[i].addEventListener("input", (e) => {
@@ -7,6 +11,45 @@ for(let i = 0; i < inputs.length; i++)
             var checkbox = e.target.parentElement.previousElementSibling.firstChild;
             checkbox.checked = true;
         }
+        let total = 0;
+        inputs.forEach((quantity) => {
+            total += Number(quantity.value);
+        });
+        totalHtml.innerHTML = total;
+        freeHtml.innerHTML = freeGiftSuggestion(total);
+    })
+}
+
+function freeGiftSuggestion(total) {
+    if (total >= 15 && total < 25) {
+        return 1;
+    }
+    else if (total >= 25 && total < 50) {
+        return 2;
+    }
+    else if (total >= 50 && total < 100) {
+        return 8;
+    }
+    else if (total >= 100 && total < 200) {
+        return 20;
+    }
+    else if (total >= 200 && total < 500) {
+        return 50;
+    }
+    else if (total >= 500 && total < 1000) {
+        return 175;
+    }
+    else if (total >= 1000) {
+        return 350;
+    }
+    else
+        return 0;
+}
+
+// append free row if clicked
+for (let i = 0; i < freeBtns.length; i++) {
+    freeBtns[i].addEventListener("input", (e) => {
+        //append new row with price 0
     })
 }
 
@@ -14,8 +57,9 @@ var generateQuoteButton = document.querySelector('button');
 generateQuoteButton.addEventListener("click", generateQuote);
 
 function generateQuote() {
-    var selectedItems = receiveItems();
-    var itemObjects = parseSelectedItems(selectedItems);
+    // var selectedItems = receiveItems();
+    // var itemObjects = parseSelectedItems(selectedItems);
+    let email = generateEmail( parseSelectedItems( receiveItems() ) );
     // generate order
     // add quote to html
 }
@@ -32,15 +76,99 @@ function receiveItems() {
 function parseSelectedItems(selectedItems) {
     var products = [];
     
+    function extractRadioSelection(product)
+    {
+        for(let i = 0; i < product.children[3].children.length; i += 2)
+        {
+            if (product.children[3].children[i].checked)
+                return product.children[3].children[i].value;
+        }
+    }
+
     selectedItems.forEach((product) => {
         var newProduct = {
             name : product.children[2].innerText,
-            quantity : product.children[1].children[0].value,
-            price : product.children[3].innerText,
-            fullPrice : product.children[4].innerText,
-        }
+            quantity : Number(product.children[1].children[0].value),
+            color: extractRadioSelection(product),
+            price : Number(product.children[4].innerText),
+            fullPrice : Number(product.children[5].innerText),
+        };
+        newProduct.total = newProduct.fullPrice * newProduct.quantity;
         products.push(newProduct);
     });
     
     return products;
+}
+
+function generateEmail(productArray) {
+    const quote = "<div>";
+    const order = {
+        itemsOrdered: 0,
+        products: [],
+        numFreeGifts: 0,
+        shipping: 62,
+        totalItems: 0
+    };
+    productArray.forEach((product) => {
+        order.itemsOrdered += product.quantity;
+        order.totalItems += product.quantity;
+        order.products.push(product);
+    });
+
+    if(order.itemsOrdered >= 15 && order.itemsOrdered < 25)
+    {
+        order.numFreeGifts = 1;
+    }
+    else if (order.itemsOrdered >= 25 && order.itemsOrdered < 50)
+    {
+        order.numFreeGifts = 2;
+    }
+    else if (order.itemsOrdered >= 50 && order.itemsOrdered < 100) {
+        order.numFreeGifts = 8;
+    }
+    else if (order.itemsOrdered >= 100 && order.itemsOrdered < 200) {
+        order.numFreeGifts = 20;
+    }
+    else if (order.itemsOrdered >= 200 && order.itemsOrdered < 500) {
+        order.numFreeGifts = 50;
+    }
+    else if (order.itemsOrdered >= 500 && order.itemsOrdered < 1000) {
+        order.numFreeGifts = 175;
+    }
+    else if (order.itemsOrdered >= 1000) {
+        order.numFreeGifts = 350;
+    }
+
+    order.totalItems += order.numFreeGifts;
+
+    // const quote = `<div>
+    //         <h3>Quote #1 - 25 Gifts w/ 2 additional at Quantity Discount - SAVINGS: $822\n</h3>
+
+    //         <p>25 -  WHITE Petite Culinary Companions                            $4975\n</p>
+    //         <p>28 -  Gift Wraps                                                                    $140\n</p>
+    //         <p>03 -  P. Culinary Companion Sets @ Quantity Discount      $60\n</p>
+    //         <p>01 - FREE 5" Santoku for your home!                                  $0\n</p>
+    //         <p>01 - FREE Carving Set for your home!                                $0\n</p>
+
+    //         <p>FLAT RATE SHIPPING                                                        $62\n</p>
+
+
+    //         <p>The Total is $5237 + local tax paid over 5 months interest free for a monthly payment of $1047.40 + local tax . With this quote your cost per gift would be $185 !\n</p>
+
+
+    //         <h3>Quote #2 - 15 Gifts w/ 1 additional at Quantity Discount - SAVINGS: $290\n</h3>
+
+    //         <p>15 -  WHITE Petite Culinary Companions                            $2985\n</p>
+    //         <p>16 -  Gift Wraps                                                                    $80\n</p>
+    //         <p>01 -  P. Culinary Companion Sets @ Quantity Discount      $20\n</p>
+    //         <p>01 - FREE 5" Santoku for your home!                                  $0\n</p>
+
+    //         <p>FLAT RATE SHIPPING                                                        $62\n</p>
+
+    //         <p>The Total is $3147 + local tax paid over 5 months interest free for a monthly payment of $629.40 + local tax. With this quote your cost per gift would be $193 .\n</p>
+
+
+    //         <p>Do you want to save more with Quote #1 or stick to Quote #2?\n</p></div>
+    //     `;
+    document.body.innerHTML += quote;
 }
