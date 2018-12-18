@@ -1,23 +1,75 @@
-var inputs = document.querySelectorAll('input[type=number]');
-var totalHtml = document.querySelector('#totalCount');
-var freeHtml = document.querySelector('#freeGiftCount');
-var freeBtns = document.querySelectorAll('.freebtn');
+let inputs, totalHtml, freeHtml, freeBtns, giftsHtml, generateQuoteButton;
+freeBtns = document.querySelectorAll('.freebtn');
+generatePageListeners();
+document.body.addEventListener("change", generatePageListeners);
 
-// check box when value of product is over 1
-for(let i = 0; i < inputs.length; i++)
-{
-    inputs[i].addEventListener("input", (e) => {
-        if(e.target.value > 0) {
-            var checkbox = e.target.parentElement.previousElementSibling.firstChild;
-            checkbox.checked = true;
-        }
-        let total = 0;
-        inputs.forEach((quantity) => {
-            total += Number(quantity.value);
-        });
-        totalHtml.innerHTML = total;
-        freeHtml.innerHTML = freeGiftSuggestion(total);
+// append free row if clicked
+for (let i = 0; i < freeBtns.length; i++) {
+    freeBtns[i].addEventListener("click", (e) => {
+        let productRow = e.target.parentElement.parentElement;
+        let freeRow = document.createElement('tr');
+        freeRow.innerHTML = `
+                <th><input type="checkbox" name="${productRow.children[0].firstElementChild.name}"></th>
+                <th><input type="number" name="quantity" min="0" class="free"></th>
+                <td>${productRow.children[2].innerHTML}</td>
+                <td><input type="radio" id="classic" name="color1" value="classic">
+                <label for="classic">Classic</label>
+                
+                <input type="radio" id="white" name="color2" value="white">
+                <label for="white">White</label>
+                
+                <input type="radio" id="red" name="color3" value="red">
+                <label for="red">Red</label></td>
+                <td>0</td>
+                <td>0</td>
+            `;
+        freeRow.classList = `${productRow.classList.value}`;
+        freeRow.id = `${productRow.id}`;
+        productRow.insertAdjacentElement('afterend', freeRow);
     })
+}
+
+function generatePageListeners()
+{
+    inputs = document.querySelectorAll('input[type=number]');
+    totalHtml = document.querySelector('#totalCount');
+    freeHtml = document.querySelector('#suggestedGifts');
+    giftsHtml = document.querySelector('#giftCount');
+    finalHtml = document.querySelector('#finalCount');
+
+
+    // check box when value of product is over 1
+    for(let i = 0; i < inputs.length; i++)
+    {
+        inputs[i].addEventListener("input", (e) => {
+            if(e.target.value > 0) {
+                var checkbox = e.target.parentElement.previousElementSibling.firstChild;
+                checkbox.checked = true;
+            }
+            let totalOrdered = 0, giftsAdded = 0;
+            inputs.forEach((input) => {
+                if(input.classList.value !== "free")
+                {
+                    totalOrdered += Number(input.value);
+                }
+                else
+                {
+                    giftsAdded += Number(input.value);
+                }
+            });
+
+            let finalNum = totalOrdered + giftsAdded;
+            totalHtml.innerHTML = totalOrdered;
+            freeHtml.innerHTML = freeGiftSuggestion(totalOrdered);
+            giftsHtml.innerHTML = giftsAdded;
+            finalHtml.innerHTML = finalNum;
+        })
+    }
+
+    
+
+    generateQuoteButton = document.querySelector('button');
+    generateQuoteButton.addEventListener("click", generateQuote);
 }
 
 function freeGiftSuggestion(total) {
@@ -46,15 +98,7 @@ function freeGiftSuggestion(total) {
         return 0;
 }
 
-// append free row if clicked
-for (let i = 0; i < freeBtns.length; i++) {
-    freeBtns[i].addEventListener("input", (e) => {
-        //append new row with price 0
-    })
-}
 
-var generateQuoteButton = document.querySelector('button');
-generateQuoteButton.addEventListener("click", generateQuote);
 
 function generateQuote() {
     // var selectedItems = receiveItems();
@@ -115,29 +159,7 @@ function generateEmail(productArray) {
         order.products.push(product);
     });
 
-    if(order.itemsOrdered >= 15 && order.itemsOrdered < 25)
-    {
-        order.numFreeGifts = 1;
-    }
-    else if (order.itemsOrdered >= 25 && order.itemsOrdered < 50)
-    {
-        order.numFreeGifts = 2;
-    }
-    else if (order.itemsOrdered >= 50 && order.itemsOrdered < 100) {
-        order.numFreeGifts = 8;
-    }
-    else if (order.itemsOrdered >= 100 && order.itemsOrdered < 200) {
-        order.numFreeGifts = 20;
-    }
-    else if (order.itemsOrdered >= 200 && order.itemsOrdered < 500) {
-        order.numFreeGifts = 50;
-    }
-    else if (order.itemsOrdered >= 500 && order.itemsOrdered < 1000) {
-        order.numFreeGifts = 175;
-    }
-    else if (order.itemsOrdered >= 1000) {
-        order.numFreeGifts = 350;
-    }
+    order.numFreeGifts = freeGiftSuggestion(order.itemsOrdered);
 
     order.totalItems += order.numFreeGifts;
 
