@@ -5,6 +5,8 @@ const SqliteToJson = require('sqlite-to-json');
 // for direct testing
 const db = '../db/products.db';
 
+loadDB(db);
+
 function loadDB(path) {
     const exporter = new SqliteToJson({
         client: new sqlite3.Database(path)

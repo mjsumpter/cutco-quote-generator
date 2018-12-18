@@ -30,12 +30,20 @@ function generateTable(productsArray) {
         let product = productsArray[i];
         /* UPDATE TO READ TEMPLATE FROM FILE */
         table += `<tr class="product-row" id="${product.itemNum}">
-                        <th><input type="checkbox" name="${product.itemNum}"></th>
-                        <th><input type="number" name="quantity" min="0"></th>
-                        <td>${product.description}</td>
-                        <td>$${product.price}</td>
-                        <td>$${product.priceFull}</td>
-                    </tr>
+                    <th><input type="checkbox" name="${product.itemNum}"></th>
+                    <th><input type="number" name="quantity" min="0"></th>
+                    <td>${product.description}</td>
+                    <td><input type="radio" id="classic" name="color${i}" value="classic">
+                    <label for="classic">Classic</label>
+                    
+                    <input type="radio" id="white" name="color${i}" value="white">
+                    <label for="white">White</label>
+                    
+                    <input type="radio" id="red" name="color${i}" value="red">
+                    <label for="red">Red</label></td>
+                    <td>${product.price}</td>
+                    <td>${product.priceFull}</td>
+                  </tr>
                     `
     }
     return table;
