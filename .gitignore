@@ -1,0 +1,7 @@
+db/
+*.pdf
+*.ods
+*.png
+*.csv
+.~lock.productList.ods#
+node_modules/
