@@ -1,5 +1,7 @@
 let inputs, totalHtml, freeHtml, freeBtns, giftsHtml, generateQuoteButton;
 freeBtns = document.querySelectorAll('.freebtn');
+generateQuoteButton = document.querySelector('#generateBtn');
+generateQuoteButton.addEventListener("click", generateQuote);
 generatePageListeners();
 document.body.addEventListener("change", generatePageListeners);
 
@@ -21,7 +23,7 @@ for (let i = 0; i < freeBtns.length; i++) {
                 <input type="radio" id="red" name="color3" value="red">
                 <label for="red">Red</label></td>
                 <td>0</td>
-                <td>0</td>
+                <td>20</td>
             `;
         freeRow.classList = `${productRow.classList.value}`;
         freeRow.id = `${productRow.id}`;
@@ -29,8 +31,7 @@ for (let i = 0; i < freeBtns.length; i++) {
     })
 }
 
-function generatePageListeners()
-{
+function generatePageListeners() {
     inputs = document.querySelectorAll('input[type=number]');
     totalHtml = document.querySelector('#totalCount');
     freeHtml = document.querySelector('#suggestedGifts');
@@ -39,21 +40,18 @@ function generatePageListeners()
 
 
     // check box when value of product is over 1
-    for(let i = 0; i < inputs.length; i++)
-    {
+    for (let i = 0; i < inputs.length; i++) {
         inputs[i].addEventListener("input", (e) => {
-            if(e.target.value > 0) {
+            if (e.target.value > 0) {
                 var checkbox = e.target.parentElement.previousElementSibling.firstChild;
                 checkbox.checked = true;
             }
             let totalOrdered = 0, giftsAdded = 0;
             inputs.forEach((input) => {
-                if(input.classList.value !== "free")
-                {
+                if (input.classList.value !== "free") {
                     totalOrdered += Number(input.value);
                 }
-                else
-                {
+                else {
                     giftsAdded += Number(input.value);
                 }
             });
@@ -65,11 +63,6 @@ function generatePageListeners()
             finalHtml.innerHTML = finalNum;
         })
     }
-
-    
-
-    generateQuoteButton = document.querySelector('button');
-    generateQuoteButton.addEventListener("click", generateQuote);
 }
 
 function freeGiftSuggestion(total) {
@@ -101,9 +94,10 @@ function freeGiftSuggestion(total) {
 
 
 function generateQuote() {
+
     // var selectedItems = receiveItems();
     // var itemObjects = parseSelectedItems(selectedItems);
-    let email = generateEmail( parseSelectedItems( receiveItems() ) );
+    let email = generateEmail(parseSelectedItems(receiveItems()));
     // generate order
     // add quote to html
 }
@@ -119,78 +113,84 @@ function receiveItems() {
 
 function parseSelectedItems(selectedItems) {
     var products = [];
-    
-    function extractRadioSelection(product)
-    {
-        for(let i = 0; i < product.children[3].children.length; i += 2)
-        {
+
+    function extractColorSelection(product) {
+        for (let i = 0; i < product.children[3].children.length; i += 2) {
             if (product.children[3].children[i].checked)
                 return product.children[3].children[i].value;
         }
+        return "";
+    }
+
+    function extractFreeOption(product) {
+        if (product.children[1].children[0].classList.value === "free")
+            return true;
+        else
+            return false;
     }
 
     selectedItems.forEach((product) => {
         var newProduct = {
-            name : product.children[2].innerText,
-            quantity : Number(product.children[1].children[0].value),
-            color: extractRadioSelection(product),
-            price : Number(product.children[4].innerText),
-            fullPrice : Number(product.children[5].innerText),
+            name: product.children[2].innerText,
+            quantity: Number(product.children[1].children[0].value),
+            color: extractColorSelection(product),
+            price: Number(product.children[4].innerText),
+            fullPrice: Number(product.children[5].innerText),
+            free: extractFreeOption(product)
         };
         newProduct.total = newProduct.fullPrice * newProduct.quantity;
         products.push(newProduct);
     });
-    
     return products;
 }
 
 function generateEmail(productArray) {
-    const quote = "<div>";
+    let quote = "<div id='quote'>";
+    const giftWrapSelection = document.querySelector('#yes');
     const order = {
         itemsOrdered: 0,
         products: [],
-        numFreeGifts: 0,
         shipping: 62,
-        totalItems: 0
+        totalItems: 0,
+        freeItems: 0,
+        giftWrap: giftWrapSelection.checked,
+        total: 0
     };
     productArray.forEach((product) => {
-        order.itemsOrdered += product.quantity;
-        order.totalItems += product.quantity;
         order.products.push(product);
+        if (product.free) {
+            order.freeItems += product.quantity;
+        }
+        else {
+            order.itemsOrdered += product.quantity;
+        }
+        order.total += Number(product.quantity * product.fullPrice);
     });
+    order.totalItems = order.freeItems + order.itemsOrdered;
 
-    order.numFreeGifts = freeGiftSuggestion(order.itemsOrdered);
+    const header = `<h3>Quote #1 - ${order.itemsOrdered} Gifts w/ ${order.freeItems} additional at Quantity Discount - SAVINGS: ???</h3>`;
+    quote += header;
 
-    order.totalItems += order.numFreeGifts;
+    order.products.forEach((product) => {
+        let productEntry = "";
+        if (product.free) {
+            productEntry = `<p>${product.quantity} - ${product.color.toUpperCase()} ${product.name} @ Quantity Discount <span class="productTotal">$${product.quantity * product.fullPrice}</span></p>`;
+        }
+        else {
+            productEntry = `<p>${product.quantity} - ${product.color.toUpperCase()} ${product.name} <span class="productTotal">$${product.quantity * product.fullPrice}</span></p>`;
+        }
 
-    // const quote = `<div>
-    //         <h3>Quote #1 - 25 Gifts w/ 2 additional at Quantity Discount - SAVINGS: $822\n</h3>
+        quote += productEntry;
+    });
+    // ADD FREE INCLUDED GIFTS!
+    if (order.giftWrap) {
+        order.total += order.totalItems * 5;
+        quote += `<p>${order.totalItems} - Gift Wraps<span class="productTotal">$${5 * order.totalItems}</span></p>`;
+    }
 
-    //         <p>25 -  WHITE Petite Culinary Companions                            $4975\n</p>
-    //         <p>28 -  Gift Wraps                                                                    $140\n</p>
-    //         <p>03 -  P. Culinary Companion Sets @ Quantity Discount      $60\n</p>
-    //         <p>01 - FREE 5" Santoku for your home!                                  $0\n</p>
-    //         <p>01 - FREE Carving Set for your home!                                $0\n</p>
+    quote += `<p>FLAT RATE SHIPPING<span class="productTotal">$${order.shipping}</span></p>`;
+    quote += `<p>The Total is $${(order.total + order.shipping).toFixed(2)} + local tax paid over 5 months interest free for a monthly payment of $${((order.total + order.shipping) / 5).toFixed(2)} + local tax. With this quote your cost per gift would be <strong>$${Math.ceil(order.total / order.totalItems)}</strong>!</p>`;
+    quote += "</div>";
 
-    //         <p>FLAT RATE SHIPPING                                                        $62\n</p>
-
-
-    //         <p>The Total is $5237 + local tax paid over 5 months interest free for a monthly payment of $1047.40 + local tax . With this quote your cost per gift would be $185 !\n</p>
-
-
-    //         <h3>Quote #2 - 15 Gifts w/ 1 additional at Quantity Discount - SAVINGS: $290\n</h3>
-
-    //         <p>15 -  WHITE Petite Culinary Companions                            $2985\n</p>
-    //         <p>16 -  Gift Wraps                                                                    $80\n</p>
-    //         <p>01 -  P. Culinary Companion Sets @ Quantity Discount      $20\n</p>
-    //         <p>01 - FREE 5" Santoku for your home!                                  $0\n</p>
-
-    //         <p>FLAT RATE SHIPPING                                                        $62\n</p>
-
-    //         <p>The Total is $3147 + local tax paid over 5 months interest free for a monthly payment of $629.40 + local tax. With this quote your cost per gift would be $193 .\n</p>
-
-
-    //         <p>Do you want to save more with Quote #1 or stick to Quote #2?\n</p></div>
-    //     `;
     document.body.innerHTML += quote;
 }
