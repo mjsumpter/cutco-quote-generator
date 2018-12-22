@@ -30,7 +30,7 @@ function discountBtnEvent(e) {
                 <th><input type="checkbox" name="${productRow.children[0].firstElementChild.name}" class="selection"></th>
                 <th><input type="number" name="quantity" min="0" class="discount"></th>
                 <td>${productRow.children[2].innerHTML}</td>
-                <td>${productRow.children[3].innerHTML}</td>
+                <td>-</td>
                 <td>0</td>
                 <td>${productRow.children[5].innerHTML}</td>
                 <td>20</td>
@@ -50,7 +50,7 @@ function freeBtnEvent(e) {
             <th><input type="checkbox" name="${productRow.children[0].firstElementChild.name}" class="selection"></th>
             <th><input type="number" name="quantity" min="0" class="free"></th>
             <td>FREE ${productRow.children[2].innerHTML}</td>
-            <td>${productRow.children[3].innerHTML}</td>
+            <td>-</td>
             <td>0</td>
             <td><input type="checkbox" class="box" name="box"><label for="box">Box</label><input type="checkbox" class="bow" name="bow"><label for="bow">Bow</label><input type="checkbox" class="engraving" name="engraving"><label for="engraving">Engraving</label></td>
             <td>0</td>
