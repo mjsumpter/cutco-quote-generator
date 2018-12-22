@@ -24,24 +24,28 @@ function renderHTML(productsArray) {
 // When provided with json containing product information, generates table contents
 function generateTable(productsArray) {
     let table = "";
-
+    productsArray.sort((a, b) => {
+        return b.priceFull - a.priceFull;
+    });
     for (let i = 0; i < productsArray.length; i++)
     {
         let product = productsArray[i];
+        let colors = [product.color1, product.color2, product.color3];
+        console.log(colors);
         /* UPDATE TO READ TEMPLATE FROM FILE */
         table += `<tr class="product-row" id="${product.itemNum}">
                     <th><input type="checkbox" name="${product.itemNum}"></th>
                     <th><input type="number" name="quantity" min="0"></th>
                     <td>${product.description}</td>
-                    <td><input type="radio" id="classic" name="color${i}" value="classic">
-                    <label for="classic">Classic</label>
+                    <td>${colors.map((key) => {
+                        if (key)
+                        {
+                            return `<input type="radio" id="${key ? key : '-'}" name="color${i} " value="${key ? key : '-'}">
+                                <label for="${key ? key : '-'}" >${key ? key.charAt(0).toUpperCase() + key.slice(1) : '-'}</label >`
+                        }
+                    }).join('')}</td>
                     
-                    <input type="radio" id="white" name="color${i}" value="white">
-                    <label for="white">White</label>
-                    
-                    <input type="radio" id="red" name="color${i}" value="red">
-                    <label for="red">Red</label></td>
-                    <td>${product.price}</td>
+                    <td>${product.price ? product.price : '-'}</td>
                     <td>${product.priceFull}</td>
                     <td><button class="freebtn">+</button></td>
                   </tr>
