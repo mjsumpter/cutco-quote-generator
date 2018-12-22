@@ -34,7 +34,7 @@ function generateTable(productsArray) {
         
         /* UPDATE TO READ TEMPLATE FROM FILE */
         table += `<tr class="product-row" id="${product.itemNum}">
-                    <th><input type="checkbox" name="${product.itemNum}"></th>
+                    <th><input type="checkbox" name="${product.itemNum}" class="selection"></th>
                     <th><input type="number" name="quantity" min="0"></th>
                     <td>${product.description}</td>
                     <td>${colors.map((key) => {
@@ -46,7 +46,9 @@ function generateTable(productsArray) {
                     }).join('')}</td>
                     
                     <td>${product.price ? product.price : '-'}</td>
+                    <td><input type="checkbox" class="box" name="box" checked><label for="box">Box</label><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></td>
                     <td>${product.priceFull}</td>
+                    <td><button class="discountbtn">+</button></td>
                     <td><button class="freebtn">+</button></td>
                   </tr>
                     `
