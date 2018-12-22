@@ -31,7 +31,7 @@ function generateTable(productsArray) {
     {
         let product = productsArray[i];
         let colors = [product.color1, product.color2, product.color3];
-        console.log(colors);
+        
         /* UPDATE TO READ TEMPLATE FROM FILE */
         table += `<tr class="product-row" id="${product.itemNum}">
                     <th><input type="checkbox" name="${product.itemNum}"></th>
