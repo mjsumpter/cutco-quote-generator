@@ -1,3 +1,6 @@
+    // product numbers of items that are in a set - receive different pricing patterns
+let setItemNums = [3822, 1851, 3852, 3849, 1849, 3836, 1836, 1850, 3829, 3828, 3826, 3827];
+
 // Element variables
 let inputs = Array.prototype.slice.call(document.querySelectorAll('input[type=number]'));
 let totalHtml = document.querySelector('#totalCount');
@@ -5,9 +8,9 @@ let suggestedHtml = document.querySelector('#suggestedGifts');
 let discountHtml = document.querySelector('#discountCount');
 let freeHtml = document.querySelector('#freeCount');
 let finalHtml = document.querySelector('#finalCount');
-let boxCheck = document.querySelectorAll('.box');
-let bowCheck = document.querySelectorAll('.bow');
-let engravingCheck = document.querySelectorAll('.engraving');
+let boxCheck = Array.prototype.slice.call(document.querySelectorAll('.box'));
+let bowCheck = Array.prototype.slice.call(document.querySelectorAll('.bow'));
+let engravingCheck = Array.prototype.slice.call(document.querySelectorAll('.engraving'));
 let freeBtns = document.querySelectorAll('.freebtn');
 let discountBtns = document.querySelectorAll('.discountbtn');
 let generateQuoteButton = document.querySelector('#generateBtn');
@@ -41,8 +44,18 @@ function addRow(e) {
                 `;
     if (buttonClicked === "discount")
     {
+        let itemNum = Number(e.target.parentElement.parentElement.id);
+        let value;
+        if (setItemNums.includes(itemNum))
+        {
+            value = 20;
+        }
+        else
+        {
+            value = 16.5;
+        }
         newRow.innerHTML += `<td>${productRow.children[5].innerHTML}</td>
-                             <td>20</td>`;
+                             <td>${value}</td>`;
     }
     else
     {
@@ -95,17 +108,34 @@ function inputEvent(e)
 
 
 function adjustPrice(event) {
+    let currentItemNum = Number(event.target.parentElement.parentElement.id);
+    let set = setItemNums.includes(currentItemNum);
+
     let target = event.target.classList.value;
     let value;
     switch (target) {
         case "box":
-            value = 6;
+            if(set)
+            {
+                value = 0;
+            }
+            else
+            {
+                value = 6;
+            }
             break;
         case "bow":
             value = 1;
             break;
         case "engraving":
-            value = 9.5;
+            if(set)
+            {
+                value = 9.5 * 2;
+            }
+            else
+            {
+                value = 9.5;
+            }
             break;
     }
     let adjustment = event.srcElement.checked ? value : -1 * value;
