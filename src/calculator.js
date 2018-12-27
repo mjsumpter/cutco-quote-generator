@@ -18,10 +18,14 @@ generateQuoteButton.addEventListener("click", generateQuote);
 inputs.forEach(input => input.addEventListener("input", inputEvent));
 discountBtns.forEach(btn => btn.addEventListener("click", discountBtnEvent));
 freeBtns.forEach(btn => btn.addEventListener("click", freeBtnEvent));
+boxCheck.forEach(btn => btn.addEventListener("change", adjustPrice));
+bowCheck.forEach(btn => btn.addEventListener("change", adjustPrice));
+engravingCheck.forEach(btn => btn.addEventListener("change", adjustPrice));
 
 /************************************************************
  * 
  * MAKE THIS DRY
+ * Add check box listeners
  * */
 function discountBtnEvent(e) {
     let productRow = e.target.parentElement.parentElement;
@@ -92,39 +96,25 @@ function inputEvent(e)
 }
 
 
-
-function generatePageListeners() {
-   
-   
-    // change final values based on checked additions
-    for(let i = 0; i < boxCheck.length; i++)
-    {
-        boxCheck[i].addEventListener('change', adjustPrice);
-        bowCheck[i].addEventListener('change', adjustPrice);
-        engravingCheck[i].addEventListener('change', adjustPrice);
+function adjustPrice(event) {
+    let target = event.target.classList.value;
+    let value;
+    switch (target) {
+        case "box":
+            value = 6;
+            break;
+        case "bow":
+            value = 1;
+            break;
+        case "engraving":
+            value = 9.5;
+            break;
     }
-
-
-    function adjustPrice(event) {
-        let target = event.target.classList.value;
-        let value;
-        switch(target) {
-            case "box":
-                value = 6;
-                break;
-            case "bow":
-                value = 1;
-                break;
-            case "engraving":
-                value = 9.5;
-                break;
-        }
-        let adjustment = event.srcElement.checked ? value : -1 * value;
-        let priceElement = event.target.parentElement.parentElement.children[6];
-        let price = Number(priceElement.innerHTML);
-        price += adjustment;
-        priceElement.innerHTML = price;      
-    }
+    let adjustment = event.srcElement.checked ? value : -1 * value;
+    let priceElement = event.target.parentElement.parentElement.children[6];
+    let price = Number(priceElement.innerHTML);
+    price += adjustment;
+    priceElement.innerHTML = price;
 }
 
 function freeGiftSuggestion(total) {
@@ -157,8 +147,6 @@ function freeGiftSuggestion(total) {
 
 function generateQuote() {
 
-    // var selectedItems = receiveItems();
-    // var itemObjects = parseSelectedItems(selectedItems);
     let email = generateEmail(parseSelectedItems(receiveItems()));
     // generate order
     // add quote to html
