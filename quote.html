@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Customer Quote</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+</head>
+<body>
+    
+    <script>
+        const electron = require('electron');
+        const {ipcRenderer} = electron;
+
+        ipcRenderer.on('email', (e, item) => {
+            let body = document.body;
+            body.innerHTML += item;
+        });
+    </script>
+</body>
+</html>
