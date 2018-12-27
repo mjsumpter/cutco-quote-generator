@@ -6,8 +6,8 @@
 
 const fs = require('fs');
 
-// renders index.html
-function renderHTML(productsArray) {
+// renders index.html for local testing
+function renderHTMLLocal(productsArray) {
     const outFileName = "../index.html";
     const htmlStream = fs.createWriteStream(outFileName);
     htmlStream.once('open', function (fd) {
@@ -16,6 +16,20 @@ function renderHTML(productsArray) {
         html += fs.readFileSync("../views/table.html", "utf8");
         html += generateTable(productsArray);
         html += fs.readFileSync("../views/footer.html", "utf8");
+        htmlStream.end(html);
+    });
+}
+
+// renders index.html for electron refresh
+function renderHTML(productsArray) {
+    const outFileName = "./index.html";
+    const htmlStream = fs.createWriteStream(outFileName);
+    htmlStream.once('open', function (fd) {
+        let html = "";
+        html += fs.readFileSync("./views/header.html", "utf8");
+        html += fs.readFileSync("./views/table.html", "utf8");
+        html += generateTable(productsArray);
+        html += fs.readFileSync("./views/footer.html", "utf8");
         htmlStream.end(html);
     });
 }
@@ -57,3 +71,4 @@ function generateTable(productsArray) {
 }
 
 module.exports.renderHTML = renderHTML;
+module.exports.renderHTMLLocal = renderHTMLLocal;

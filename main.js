@@ -1,3 +1,7 @@
+//Testing
+const reRender = require('./src/sqlToHtml');
+//end testing
+
 const electron = require("electron");
 const url = require('url');
 const path = require('path');
@@ -75,14 +79,18 @@ const mainMenuTemplate = [
         submenu: [
             {
                 label: 'Clear Page',
+                accelerator: process.platform == 'darwin' ? 'Command+Z' : 'Ctrl+Z',
                 click(){
-                    //refresh/clear all page content
+                    mainWindow.reload();
                 }
             },
             {
                 label: 'Reload Database',
+                accelerator: process.platform == 'darwin' ? 'Command+R' : 'Ctrl+R',
                 click(){
-                    // run sqltohtml script, reload html
+                    reRender.loadDB('./db/products.db', () => {
+                        mainWindow.reload();
+                    });
                 }
             },
             {
