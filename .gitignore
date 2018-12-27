@@ -5,3 +5,6 @@ db/
 *.csv
 .~lock.productList.ods#
 node_modules/
+release-builds/
+dist/
+assets/icons/
