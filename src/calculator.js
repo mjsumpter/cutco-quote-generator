@@ -16,57 +16,55 @@ let rows = document.querySelectorAll("tr");
 // Event Listeners
 generateQuoteButton.addEventListener("click", generateQuote);
 inputs.forEach(input => input.addEventListener("input", inputEvent));
-discountBtns.forEach(btn => btn.addEventListener("click", discountBtnEvent));
-freeBtns.forEach(btn => btn.addEventListener("click", freeBtnEvent));
+discountBtns.forEach(btn => btn.addEventListener("click", addRow));
+freeBtns.forEach(btn => btn.addEventListener("click", addRow));
 boxCheck.forEach(btn => btn.addEventListener("change", adjustPrice));
 bowCheck.forEach(btn => btn.addEventListener("change", adjustPrice));
 engravingCheck.forEach(btn => btn.addEventListener("change", adjustPrice));
 
+// Functions
+
 /************************************************************
- * 
- * MAKE THIS DRY
  * Add check box listeners
  * */
-function discountBtnEvent(e) {
+function addRow(e) {
     let productRow = e.target.parentElement.parentElement;
-    let discountRow = document.createElement('tr');
-    discountRow.innerHTML = `
+    let newRow = document.createElement('tr');
+    let buttonClicked = e.target.classList.value.replace('btn', "");
+
+    newRow.innerHTML = `
                 <th><input type="checkbox" name="${productRow.children[0].firstElementChild.name}" class="selection"></th>
-                <th><input type="number" name="quantity" min="0" class="discount"></th>
+                <th><input type="number" name="quantity" min="0" class="${buttonClicked}"></th>
                 <td>${productRow.children[2].innerHTML}</td>
                 <td>-</td>
                 <td>0</td>
-                <td>${productRow.children[5].innerHTML}</td>
-                <td>20</td>
-            `;
-    discountRow.classList = `${productRow.classList.value}`;
-    discountRow.id = `${productRow.id}-discount`;
-    inputs.push(discountRow.querySelector('input[type=number]'));
-    discountRow.querySelector('input[type=number]').addEventListener("input", inputEvent);
-    productRow.insertAdjacentElement('afterend', discountRow);
+                `;
+    if (buttonClicked === "discount")
+    {
+        newRow.innerHTML += `<td>${productRow.children[5].innerHTML}</td>
+                             <td>20</td>`;
+    }
+    else
+    {
+        newRow.innerHTML += `<td><input type="checkbox" class="box" name="box"><label for="box">Box</label><input type="checkbox" class="bow" name="bow"><label for="bow">Bow</label><input type="checkbox" class="engraving" name="engraving"><label for="engraving">Engraving</label></td>
+                             <td>0</td>`;
+    }            
+    newRow.classList = `${productRow.classList.value}`;
+    newRow.id = `${productRow.id}-${buttonClicked}`;
+    // push new row elements onto row arrays
+    inputs.push(newRow.querySelector('input[type=number]'));
+    boxCheck.push(newRow.querySelector('.box'));
+    bowCheck.push(newRow.querySelector('.bow'));
+    engravingCheck.push(newRow.querySelector('.engraving'));
+    // add event selectors to new row elements
+    newRow.querySelector('input[type=number]').addEventListener("input", inputEvent);
+    newRow.querySelector('.box').addEventListener("change", adjustPrice);
+    newRow.querySelector('.bow').addEventListener("change", adjustPrice);
+    newRow.querySelector('.engraving').addEventListener("change", adjustPrice);
+    //append row to html
+    productRow.insertAdjacentElement('afterend', newRow);
 }
 
-function freeBtnEvent(e) {
-    let productRow = e.target.parentElement.parentElement;
-    let freeRow = document.createElement('tr');
-
-    freeRow.innerHTML = `
-            <th><input type="checkbox" name="${productRow.children[0].firstElementChild.name}" class="selection"></th>
-            <th><input type="number" name="quantity" min="0" class="free"></th>
-            <td>FREE ${productRow.children[2].innerHTML}</td>
-            <td>-</td>
-            <td>0</td>
-            <td><input type="checkbox" class="box" name="box"><label for="box">Box</label><input type="checkbox" class="bow" name="bow"><label for="bow">Bow</label><input type="checkbox" class="engraving" name="engraving"><label for="engraving">Engraving</label></td>
-            <td>0</td>
-        `;
-
-    freeRow.classList = `${productRow.classList.value}`;
-    freeRow.id = `${productRow.id}-free`;
-    inputs.push(freeRow.querySelector('input[type=number]'));
-    freeRow.querySelector('input[type=number]').addEventListener("input", inputEvent);
-    productRow.insertAdjacentElement('afterend', freeRow);
-}
-/***************END DRY */
 function inputEvent(e)
 {
     if (e.target.value > 0) {
@@ -142,7 +140,6 @@ function freeGiftSuggestion(total) {
     else
         return 0;
 }
-
 
 
 function generateQuote() {
