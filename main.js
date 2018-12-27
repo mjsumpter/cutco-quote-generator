@@ -54,7 +54,7 @@ function createQuoteWindow(email){
     // Build menu from template
     const quoteMenu = Menu.buildFromTemplate(quoteMenuTemplate);
     // Insert menu
-    Menu.setApplicationMenu(quoteMenu);
+    quoteWindow.setMenu(quoteMenu);
 
     // add email html from ipcRenderer
     quoteWindow.webContents.on('did-finish-load', () => {
@@ -113,7 +113,7 @@ const quoteMenuTemplate = [
                 label: 'Quit',
                 accelerator: process.platform == 'darwin' ? 'Command+Q' : 'Ctrl+Q',
                 click() {
-                    app.quit();
+                    quoteWindow.close();
                 }
             }
         ]

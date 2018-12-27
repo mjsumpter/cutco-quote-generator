@@ -6,23 +6,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>CutCo Quote Generator</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./assets/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
 </head>
 
-<body>
+<body class="container fluid-container center">
     <h1>CutCo Quote Generator</h1>
-<table style="width:75%" id = "product-table">
-  <tr id = "table-header">
+<table id = "product-table" class="table table-bordered">
+  <thead class="thead-light">
     <th></th>
     <th># Ordered</th>
     <th>Product Description</th>
-    <th>Color</th>
+    <th class="options">Color</th>
     <th>Product Price</th>
-    <th>Additions</th> 
+    <th class="options">Additions</th> 
     <th>Final Price</th>
     <th>Add Quantity Discounts?</th>
     <th>Add Free Items?</th>
-  </tr>
+  </thead>
+  <tbody class="table-striped table-hover">
 
 
 
@@ -30,13 +32,13 @@
                     <th><input type="checkbox" name="1850" class="selection"></th>
                     <th><input type="number" name="quantity" min="0"></th>
                     <td>2-pc Santoku Set</td>
-                    <td><input type="radio" id="classic" name="color0 " value="classic">
-                                <label for="classic" >Classic</label ><input type="radio" id="white" name="color0 " value="white">
-                                <label for="white" >White</label ><input type="radio" id="red" name="color0 " value="red">
-                                <label for="red" >Red</label ></td>
+                    <td><div><input type="radio" id="classic" name="color0 " value="classic">
+                                <label for="classic" >Classic</label></div><div><input type="radio" id="white" name="color0 " value="white">
+                                <label for="white" >White</label></div><div><input type="radio" id="red" name="color0 " value="red">
+                                <label for="red" >Red</label></div></td>
                     
                     <td>241</td>
-                    <td><input type="checkbox" class="box" name="box" checked><label for="box">Box</label><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></td>
+                    <td><div><input type="checkbox" class="box" name="box" checked><label for="box">Box</label></div><div><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label></div><div><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></div></td>
                     <td>261</td>
                     <td><button class="discountbtn">+</button></td>
                     <td><button class="freebtn">+</button></td>
@@ -45,13 +47,13 @@
                     <th><input type="checkbox" name="3829" class="selection"></th>
                     <th><input type="number" name="quantity" min="0"></th>
                     <td>Grand Prep Set</td>
-                    <td><input type="radio" id="classic" name="color1 " value="classic">
-                                <label for="classic" >Classic</label ><input type="radio" id="white" name="color1 " value="white">
-                                <label for="white" >White</label ><input type="radio" id="red" name="color1 " value="red">
-                                <label for="red" >Red</label ></td>
+                    <td><div><input type="radio" id="classic" name="color1 " value="classic">
+                                <label for="classic" >Classic</label></div><div><input type="radio" id="white" name="color1 " value="white">
+                                <label for="white" >White</label></div><div><input type="radio" id="red" name="color1 " value="red">
+                                <label for="red" >Red</label></div></td>
                     
                     <td>209</td>
-                    <td><input type="checkbox" class="box" name="box" checked><label for="box">Box</label><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></td>
+                    <td><div><input type="checkbox" class="box" name="box" checked><label for="box">Box</label></div><div><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label></div><div><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></div></td>
                     <td>229</td>
                     <td><button class="discountbtn">+</button></td>
                     <td><button class="freebtn">+</button></td>
@@ -60,13 +62,13 @@
                     <th><input type="checkbox" name="3828" class="selection"></th>
                     <th><input type="number" name="quantity" min="0"></th>
                     <td>Petite Prep Set</td>
-                    <td><input type="radio" id="classic" name="color2 " value="classic">
-                                <label for="classic" >Classic</label ><input type="radio" id="white" name="color2 " value="white">
-                                <label for="white" >White</label ><input type="radio" id="red" name="color2 " value="red">
-                                <label for="red" >Red</label ></td>
+                    <td><div><input type="radio" id="classic" name="color2 " value="classic">
+                                <label for="classic" >Classic</label></div><div><input type="radio" id="white" name="color2 " value="white">
+                                <label for="white" >White</label></div><div><input type="radio" id="red" name="color2 " value="red">
+                                <label for="red" >Red</label></div></td>
                     
                     <td>190</td>
-                    <td><input type="checkbox" class="box" name="box" checked><label for="box">Box</label><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></td>
+                    <td><div><input type="checkbox" class="box" name="box" checked><label for="box">Box</label></div><div><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label></div><div><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></div></td>
                     <td>216</td>
                     <td><button class="discountbtn">+</button></td>
                     <td><button class="freebtn">+</button></td>
@@ -75,13 +77,13 @@
                     <th><input type="checkbox" name="1836" class="selection"></th>
                     <th><input type="number" name="quantity" min="0"></th>
                     <td>S Cook's Combo</td>
-                    <td><input type="radio" id="classic" name="color3 " value="classic">
-                                <label for="classic" >Classic</label ><input type="radio" id="white" name="color3 " value="white">
-                                <label for="white" >White</label ><input type="radio" id="red" name="color3 " value="red">
-                                <label for="red" >Red</label ></td>
+                    <td><div><input type="radio" id="classic" name="color3 " value="classic">
+                                <label for="classic" >Classic</label></div><div><input type="radio" id="white" name="color3 " value="white">
+                                <label for="white" >White</label></div><div><input type="radio" id="red" name="color3 " value="red">
+                                <label for="red" >Red</label></div></td>
                     
                     <td>195</td>
-                    <td><input type="checkbox" class="box" name="box" checked><label for="box">Box</label><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></td>
+                    <td><div><input type="checkbox" class="box" name="box" checked><label for="box">Box</label></div><div><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label></div><div><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></div></td>
                     <td>215</td>
                     <td><button class="discountbtn">+</button></td>
                     <td><button class="freebtn">+</button></td>
@@ -90,13 +92,13 @@
                     <th><input type="checkbox" name="1849" class="selection"></th>
                     <th><input type="number" name="quantity" min="0"></th>
                     <td>Culinary Companions</td>
-                    <td><input type="radio" id="classic" name="color4 " value="classic">
-                                <label for="classic" >Classic</label ><input type="radio" id="white" name="color4 " value="white">
-                                <label for="white" >White</label ><input type="radio" id="red" name="color4 " value="red">
-                                <label for="red" >Red</label ></td>
+                    <td><div><input type="radio" id="classic" name="color4 " value="classic">
+                                <label for="classic" >Classic</label></div><div><input type="radio" id="white" name="color4 " value="white">
+                                <label for="white" >White</label></div><div><input type="radio" id="red" name="color4 " value="red">
+                                <label for="red" >Red</label></div></td>
                     
                     <td>192</td>
-                    <td><input type="checkbox" class="box" name="box" checked><label for="box">Box</label><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></td>
+                    <td><div><input type="checkbox" class="box" name="box" checked><label for="box">Box</label></div><div><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label></div><div><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></div></td>
                     <td>212</td>
                     <td><button class="discountbtn">+</button></td>
                     <td><button class="freebtn">+</button></td>
@@ -105,13 +107,13 @@
                     <th><input type="checkbox" name="3836" class="selection"></th>
                     <th><input type="number" name="quantity" min="0"></th>
                     <td>Petite S. Cook's Combo</td>
-                    <td><input type="radio" id="classic" name="color5 " value="classic">
-                                <label for="classic" >Classic</label ><input type="radio" id="white" name="color5 " value="white">
-                                <label for="white" >White</label ><input type="radio" id="red" name="color5 " value="red">
-                                <label for="red" >Red</label ></td>
+                    <td><div><input type="radio" id="classic" name="color5 " value="classic">
+                                <label for="classic" >Classic</label></div><div><input type="radio" id="white" name="color5 " value="white">
+                                <label for="white" >White</label></div><div><input type="radio" id="red" name="color5 " value="red">
+                                <label for="red" >Red</label></div></td>
                     
                     <td>182</td>
-                    <td><input type="checkbox" class="box" name="box" checked><label for="box">Box</label><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></td>
+                    <td><div><input type="checkbox" class="box" name="box" checked><label for="box">Box</label></div><div><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label></div><div><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></div></td>
                     <td>202</td>
                     <td><button class="discountbtn">+</button></td>
                     <td><button class="freebtn">+</button></td>
@@ -120,13 +122,13 @@
                     <th><input type="checkbox" name="3849" class="selection"></th>
                     <th><input type="number" name="quantity" min="0"></th>
                     <td>Pet. Culinary Companions</td>
-                    <td><input type="radio" id="classic" name="color6 " value="classic">
-                                <label for="classic" >Classic</label ><input type="radio" id="white" name="color6 " value="white">
-                                <label for="white" >White</label ><input type="radio" id="red" name="color6 " value="red">
-                                <label for="red" >Red</label ></td>
+                    <td><div><input type="radio" id="classic" name="color6 " value="classic">
+                                <label for="classic" >Classic</label></div><div><input type="radio" id="white" name="color6 " value="white">
+                                <label for="white" >White</label></div><div><input type="radio" id="red" name="color6 " value="red">
+                                <label for="red" >Red</label></div></td>
                     
                     <td>179</td>
-                    <td><input type="checkbox" class="box" name="box" checked><label for="box">Box</label><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></td>
+                    <td><div><input type="checkbox" class="box" name="box" checked><label for="box">Box</label></div><div><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label></div><div><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></div></td>
                     <td>199</td>
                     <td><button class="discountbtn">+</button></td>
                     <td><button class="freebtn">+</button></td>
@@ -135,13 +137,13 @@
                     <th><input type="checkbox" name="3852" class="selection"></th>
                     <th><input type="number" name="quantity" min="0"></th>
                     <td>Shear Utility Set</td>
-                    <td><input type="radio" id="classic" name="color7 " value="classic">
-                                <label for="classic" >Classic</label ><input type="radio" id="white" name="color7 " value="white">
-                                <label for="white" >White</label ><input type="radio" id="red" name="color7 " value="red">
-                                <label for="red" >Red</label ></td>
+                    <td><div><input type="radio" id="classic" name="color7 " value="classic">
+                                <label for="classic" >Classic</label></div><div><input type="radio" id="white" name="color7 " value="white">
+                                <label for="white" >White</label></div><div><input type="radio" id="red" name="color7 " value="red">
+                                <label for="red" >Red</label></div></td>
                     
                     <td>175</td>
-                    <td><input type="checkbox" class="box" name="box" checked><label for="box">Box</label><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></td>
+                    <td><div><input type="checkbox" class="box" name="box" checked><label for="box">Box</label></div><div><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label></div><div><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></div></td>
                     <td>195</td>
                     <td><button class="discountbtn">+</button></td>
                     <td><button class="freebtn">+</button></td>
@@ -150,13 +152,13 @@
                     <th><input type="checkbox" name="1851" class="selection"></th>
                     <th><input type="number" name="quantity" min="0"></th>
                     <td>Shears Favorite Set</td>
-                    <td><input type="radio" id="classic" name="color8 " value="classic">
-                                <label for="classic" >Classic</label ><input type="radio" id="white" name="color8 " value="white">
-                                <label for="white" >White</label ><input type="radio" id="red" name="color8 " value="red">
-                                <label for="red" >Red</label ></td>
+                    <td><div><input type="radio" id="classic" name="color8 " value="classic">
+                                <label for="classic" >Classic</label></div><div><input type="radio" id="white" name="color8 " value="white">
+                                <label for="white" >White</label></div><div><input type="radio" id="red" name="color8 " value="red">
+                                <label for="red" >Red</label></div></td>
                     
                     <td>172</td>
-                    <td><input type="checkbox" class="box" name="box" checked><label for="box">Box</label><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></td>
+                    <td><div><input type="checkbox" class="box" name="box" checked><label for="box">Box</label></div><div><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label></div><div><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></div></td>
                     <td>192</td>
                     <td><button class="discountbtn">+</button></td>
                     <td><button class="freebtn">+</button></td>
@@ -165,13 +167,13 @@
                     <th><input type="checkbox" name="3826" class="selection"></th>
                     <th><input type="number" name="quantity" min="0"></th>
                     <td>Welcome home Set</td>
-                    <td><input type="radio" id="classic" name="color9 " value="classic">
-                                <label for="classic" >Classic</label ><input type="radio" id="white" name="color9 " value="white">
-                                <label for="white" >White</label ><input type="radio" id="red" name="color9 " value="red">
-                                <label for="red" >Red</label ></td>
+                    <td><div><input type="radio" id="classic" name="color9 " value="classic">
+                                <label for="classic" >Classic</label></div><div><input type="radio" id="white" name="color9 " value="white">
+                                <label for="white" >White</label></div><div><input type="radio" id="red" name="color9 " value="red">
+                                <label for="red" >Red</label></div></td>
                     
                     <td>150</td>
-                    <td><input type="checkbox" class="box" name="box" checked><label for="box">Box</label><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></td>
+                    <td><div><input type="checkbox" class="box" name="box" checked><label for="box">Box</label></div><div><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label></div><div><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></div></td>
                     <td>170</td>
                     <td><button class="discountbtn">+</button></td>
                     <td><button class="freebtn">+</button></td>
@@ -180,13 +182,13 @@
                     <th><input type="checkbox" name="3827" class="selection"></th>
                     <th><input type="number" name="quantity" min="0"></th>
                     <td>Time Savers Set</td>
-                    <td><input type="radio" id="classic" name="color10 " value="classic">
-                                <label for="classic" >Classic</label ><input type="radio" id="white" name="color10 " value="white">
-                                <label for="white" >White</label ><input type="radio" id="red" name="color10 " value="red">
-                                <label for="red" >Red</label ></td>
+                    <td><div><input type="radio" id="classic" name="color10 " value="classic">
+                                <label for="classic" >Classic</label></div><div><input type="radio" id="white" name="color10 " value="white">
+                                <label for="white" >White</label></div><div><input type="radio" id="red" name="color10 " value="red">
+                                <label for="red" >Red</label></div></td>
                     
                     <td>147</td>
-                    <td><input type="checkbox" class="box" name="box" checked><label for="box">Box</label><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></td>
+                    <td><div><input type="checkbox" class="box" name="box" checked><label for="box">Box</label></div><div><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label></div><div><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></div></td>
                     <td>167</td>
                     <td><button class="discountbtn">+</button></td>
                     <td><button class="freebtn">+</button></td>
@@ -195,13 +197,13 @@
                     <th><input type="checkbox" name="3882" class="selection"></th>
                     <th><input type="number" name="quantity" min="0"></th>
                     <td>Santoku Clubmates</td>
-                    <td><input type="radio" id="classic" name="color11 " value="classic">
-                                <label for="classic" >Classic</label ><input type="radio" id="white" name="color11 " value="white">
-                                <label for="white" >White</label ><input type="radio" id="red" name="color11 " value="red">
-                                <label for="red" >Red</label ></td>
+                    <td><div><input type="radio" id="classic" name="color11 " value="classic">
+                                <label for="classic" >Classic</label></div><div><input type="radio" id="white" name="color11 " value="white">
+                                <label for="white" >White</label></div><div><input type="radio" id="red" name="color11 " value="red">
+                                <label for="red" >Red</label></div></td>
                     
                     <td>133</td>
-                    <td><input type="checkbox" class="box" name="box" checked><label for="box">Box</label><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></td>
+                    <td><div><input type="checkbox" class="box" name="box" checked><label for="box">Box</label></div><div><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label></div><div><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></div></td>
                     <td>153</td>
                     <td><button class="discountbtn">+</button></td>
                     <td><button class="freebtn">+</button></td>
@@ -210,13 +212,13 @@
                     <th><input type="checkbox" name="1766" class="selection"></th>
                     <th><input type="number" name="quantity" min="0"></th>
                     <td>7" Santoku</td>
-                    <td><input type="radio" id="classic" name="color12 " value="classic">
-                                <label for="classic" >Classic</label ><input type="radio" id="white" name="color12 " value="white">
-                                <label for="white" >White</label ><input type="radio" id="red" name="color12 " value="red">
-                                <label for="red" >Red</label ></td>
+                    <td><div><input type="radio" id="classic" name="color12 " value="classic">
+                                <label for="classic" >Classic</label></div><div><input type="radio" id="white" name="color12 " value="white">
+                                <label for="white" >White</label></div><div><input type="radio" id="red" name="color12 " value="red">
+                                <label for="red" >Red</label></div></td>
                     
                     <td>124</td>
-                    <td><input type="checkbox" class="box" name="box" checked><label for="box">Box</label><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></td>
+                    <td><div><input type="checkbox" class="box" name="box" checked><label for="box">Box</label></div><div><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label></div><div><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></div></td>
                     <td>140.5</td>
                     <td><button class="discountbtn">+</button></td>
                     <td><button class="freebtn">+</button></td>
@@ -225,13 +227,13 @@
                     <th><input type="checkbox" name="1728" class="selection"></th>
                     <th><input type="number" name="quantity" min="0"></th>
                     <td>Petite Chef Knife</td>
-                    <td><input type="radio" id="classic" name="color13 " value="classic">
-                                <label for="classic" >Classic</label ><input type="radio" id="white" name="color13 " value="white">
-                                <label for="white" >White</label ><input type="radio" id="red" name="color13 " value="red">
-                                <label for="red" >Red</label ></td>
+                    <td><div><input type="radio" id="classic" name="color13 " value="classic">
+                                <label for="classic" >Classic</label></div><div><input type="radio" id="white" name="color13 " value="white">
+                                <label for="white" >White</label></div><div><input type="radio" id="red" name="color13 " value="red">
+                                <label for="red" >Red</label></div></td>
                     
                     <td>123</td>
-                    <td><input type="checkbox" class="box" name="box" checked><label for="box">Box</label><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></td>
+                    <td><div><input type="checkbox" class="box" name="box" checked><label for="box">Box</label></div><div><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label></div><div><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></div></td>
                     <td>139.5</td>
                     <td><button class="discountbtn">+</button></td>
                     <td><button class="freebtn">+</button></td>
@@ -240,13 +242,13 @@
                     <th><input type="checkbox" name="2166" class="selection"></th>
                     <th><input type="number" name="quantity" min="0"></th>
                     <td>Petite 5" Santoku</td>
-                    <td><input type="radio" id="classic" name="color14 " value="classic">
-                                <label for="classic" >Classic</label ><input type="radio" id="white" name="color14 " value="white">
-                                <label for="white" >White</label ><input type="radio" id="red" name="color14 " value="red">
-                                <label for="red" >Red</label ></td>
+                    <td><div><input type="radio" id="classic" name="color14 " value="classic">
+                                <label for="classic" >Classic</label></div><div><input type="radio" id="white" name="color14 " value="white">
+                                <label for="white" >White</label></div><div><input type="radio" id="red" name="color14 " value="red">
+                                <label for="red" >Red</label></div></td>
                     
                     <td>111</td>
-                    <td><input type="checkbox" class="box" name="box" checked><label for="box">Box</label><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></td>
+                    <td><div><input type="checkbox" class="box" name="box" checked><label for="box">Box</label></div><div><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label></div><div><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></div></td>
                     <td>127.5</td>
                     <td><button class="discountbtn">+</button></td>
                     <td><button class="freebtn">+</button></td>
@@ -255,13 +257,13 @@
                     <th><input type="checkbox" name="77" class="selection"></th>
                     <th><input type="number" name="quantity" min="0"></th>
                     <td>Shears Favorite</td>
-                    <td><input type="radio" id="classic" name="color15 " value="classic">
-                                <label for="classic" >Classic</label ><input type="radio" id="white" name="color15 " value="white">
-                                <label for="white" >White</label ><input type="radio" id="red" name="color15 " value="red">
-                                <label for="red" >Red</label ></td>
+                    <td><div><input type="radio" id="classic" name="color15 " value="classic">
+                                <label for="classic" >Classic</label></div><div><input type="radio" id="white" name="color15 " value="white">
+                                <label for="white" >White</label></div><div><input type="radio" id="red" name="color15 " value="red">
+                                <label for="red" >Red</label></div></td>
                     
                     <td>104</td>
-                    <td><input type="checkbox" class="box" name="box" checked><label for="box">Box</label><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></td>
+                    <td><div><input type="checkbox" class="box" name="box" checked><label for="box">Box</label></div><div><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label></div><div><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></div></td>
                     <td>120.5</td>
                     <td><button class="discountbtn">+</button></td>
                     <td><button class="freebtn">+</button></td>
@@ -270,12 +272,12 @@
                     <th><input type="checkbox" name="3729" class="selection"></th>
                     <th><input type="number" name="quantity" min="0"></th>
                     <td>Santoku Carver</td>
-                    <td><input type="radio" id="Classic" name="color16 " value="Classic">
-                                <label for="Classic" >Classic</label ><input type="radio" id="White" name="color16 " value="White">
-                                <label for="White" >White</label ></td>
+                    <td><div><input type="radio" id="Classic" name="color16 " value="Classic">
+                                <label for="Classic" >Classic</label></div><div><input type="radio" id="White" name="color16 " value="White">
+                                <label for="White" >White</label></div></td>
                     
                     <td>-</td>
-                    <td><input type="checkbox" class="box" name="box" checked><label for="box">Box</label><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></td>
+                    <td><div><input type="checkbox" class="box" name="box" checked><label for="box">Box</label></div><div><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label></div><div><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></div></td>
                     <td>117.5</td>
                     <td><button class="discountbtn">+</button></td>
                     <td><button class="freebtn">+</button></td>
@@ -287,7 +289,7 @@
                     <td></td>
                     
                     <td>-</td>
-                    <td><input type="checkbox" class="box" name="box" checked><label for="box">Box</label><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></td>
+                    <td><div><input type="checkbox" class="box" name="box" checked><label for="box">Box</label></div><div><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label></div><div><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></div></td>
                     <td>105.5</td>
                     <td><button class="discountbtn">+</button></td>
                     <td><button class="freebtn">+</button></td>
@@ -296,13 +298,13 @@
                     <th><input type="checkbox" name="1764" class="selection"></th>
                     <th><input type="number" name="quantity" min="0"></th>
                     <td>Cheese Knife</td>
-                    <td><input type="radio" id="classic" name="color18 " value="classic">
-                                <label for="classic" >Classic</label ><input type="radio" id="white" name="color18 " value="white">
-                                <label for="white" >White</label ><input type="radio" id="red" name="color18 " value="red">
-                                <label for="red" >Red</label ></td>
+                    <td><div><input type="radio" id="classic" name="color18 " value="classic">
+                                <label for="classic" >Classic</label></div><div><input type="radio" id="white" name="color18 " value="white">
+                                <label for="white" >White</label></div><div><input type="radio" id="red" name="color18 " value="red">
+                                <label for="red" >Red</label></div></td>
                     
                     <td>79</td>
-                    <td><input type="checkbox" class="box" name="box" checked><label for="box">Box</label><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></td>
+                    <td><div><input type="checkbox" class="box" name="box" checked><label for="box">Box</label></div><div><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label></div><div><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></div></td>
                     <td>95.5</td>
                     <td><button class="discountbtn">+</button></td>
                     <td><button class="freebtn">+</button></td>
@@ -311,13 +313,13 @@
                     <th><input type="checkbox" name="3721" class="selection"></th>
                     <th><input type="number" name="quantity" min="0"></th>
                     <td>Santoku-Trimmer</td>
-                    <td><input type="radio" id="classic" name="color19 " value="classic">
-                                <label for="classic" >Classic</label ><input type="radio" id="white" name="color19 " value="white">
-                                <label for="white" >White</label ><input type="radio" id="red" name="color19 " value="red">
-                                <label for="red" >Red</label ></td>
+                    <td><div><input type="radio" id="classic" name="color19 " value="classic">
+                                <label for="classic" >Classic</label></div><div><input type="radio" id="white" name="color19 " value="white">
+                                <label for="white" >White</label></div><div><input type="radio" id="red" name="color19 " value="red">
+                                <label for="red" >Red</label></div></td>
                     
                     <td>65</td>
-                    <td><input type="checkbox" class="box" name="box" checked><label for="box">Box</label><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></td>
+                    <td><div><input type="checkbox" class="box" name="box" checked><label for="box">Box</label></div><div><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label></div><div><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></div></td>
                     <td>81.5</td>
                     <td><button class="discountbtn">+</button></td>
                     <td><button class="freebtn">+</button></td>
@@ -326,13 +328,13 @@
                     <th><input type="checkbox" name="1768" class="selection"></th>
                     <th><input type="number" name="quantity" min="0"></th>
                     <td>Spatula Spreader</td>
-                    <td><input type="radio" id="classic" name="color20 " value="classic">
-                                <label for="classic" >Classic</label ><input type="radio" id="white" name="color20 " value="white">
-                                <label for="white" >White</label ><input type="radio" id="red" name="color20 " value="red">
-                                <label for="red" >Red</label ></td>
+                    <td><div><input type="radio" id="classic" name="color20 " value="classic">
+                                <label for="classic" >Classic</label></div><div><input type="radio" id="white" name="color20 " value="white">
+                                <label for="white" >White</label></div><div><input type="radio" id="red" name="color20 " value="red">
+                                <label for="red" >Red</label></div></td>
                     
                     <td>62</td>
-                    <td><input type="checkbox" class="box" name="box" checked><label for="box">Box</label><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></td>
+                    <td><div><input type="checkbox" class="box" name="box" checked><label for="box">Box</label></div><div><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label></div><div><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></div></td>
                     <td>78.5</td>
                     <td><button class="discountbtn">+</button></td>
                     <td><button class="freebtn">+</button></td>
@@ -341,12 +343,12 @@
                     <th><input type="checkbox" name="1754" class="selection"></th>
                     <th><input type="number" name="quantity" min="0"></th>
                     <td>Slice n' Serve</td>
-                    <td><input type="radio" id="White" name="color21 " value="White">
-                                <label for="White" >White</label ><input type="radio" id="Brown" name="color21 " value="Brown">
-                                <label for="Brown" >Brown</label ></td>
+                    <td><div><input type="radio" id="White" name="color21 " value="White">
+                                <label for="White" >White</label></div><div><input type="radio" id="Brown" name="color21 " value="Brown">
+                                <label for="Brown" >Brown</label></div></td>
                     
                     <td>-</td>
-                    <td><input type="checkbox" class="box" name="box" checked><label for="box">Box</label><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></td>
+                    <td><div><input type="checkbox" class="box" name="box" checked><label for="box">Box</label></div><div><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label></div><div><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></div></td>
                     <td>66.1</td>
                     <td><button class="discountbtn">+</button></td>
                     <td><button class="freebtn">+</button></td>
@@ -358,7 +360,7 @@
                     <td></td>
                     
                     <td>-</td>
-                    <td><input type="checkbox" class="box" name="box" checked><label for="box">Box</label><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></td>
+                    <td><div><input type="checkbox" class="box" name="box" checked><label for="box">Box</label></div><div><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label></div><div><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></div></td>
                     <td>65</td>
                     <td><button class="discountbtn">+</button></td>
                     <td><button class="freebtn">+</button></td>
@@ -367,12 +369,12 @@
                     <th><input type="checkbox" name="1755" class="selection"></th>
                     <th><input type="number" name="quantity" min="0"></th>
                     <td>Turn n' Serve</td>
-                    <td><input type="radio" id="Classic" name="color23 " value="Classic">
-                                <label for="Classic" >Classic</label ><input type="radio" id="White" name="color23 " value="White">
-                                <label for="White" >White</label ></td>
+                    <td><div><input type="radio" id="Classic" name="color23 " value="Classic">
+                                <label for="Classic" >Classic</label></div><div><input type="radio" id="White" name="color23 " value="White">
+                                <label for="White" >White</label></div></td>
                     
                     <td>-</td>
-                    <td><input type="checkbox" class="box" name="box" checked><label for="box">Box</label><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></td>
+                    <td><div><input type="checkbox" class="box" name="box" checked><label for="box">Box</label></div><div><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label></div><div><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></div></td>
                     <td>61.6</td>
                     <td><button class="discountbtn">+</button></td>
                     <td><button class="freebtn">+</button></td>
@@ -381,13 +383,13 @@
                     <th><input type="checkbox" name="1502" class="selection"></th>
                     <th><input type="number" name="quantity" min="0"></th>
                     <td>Pizza Cutter</td>
-                    <td><input type="radio" id="classic" name="color24 " value="classic">
-                                <label for="classic" >Classic</label ><input type="radio" id="white" name="color24 " value="white">
-                                <label for="white" >White</label ><input type="radio" id="red" name="color24 " value="red">
-                                <label for="red" >Red</label ></td>
+                    <td><div><input type="radio" id="classic" name="color24 " value="classic">
+                                <label for="classic" >Classic</label></div><div><input type="radio" id="white" name="color24 " value="white">
+                                <label for="white" >White</label></div><div><input type="radio" id="red" name="color24 " value="red">
+                                <label for="red" >Red</label></div></td>
                     
                     <td>47</td>
-                    <td><input type="checkbox" class="box" name="box" checked><label for="box">Box</label><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></td>
+                    <td><div><input type="checkbox" class="box" name="box" checked><label for="box">Box</label></div><div><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label></div><div><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></div></td>
                     <td>58.1</td>
                     <td><button class="discountbtn">+</button></td>
                     <td><button class="freebtn">+</button></td>
@@ -399,20 +401,21 @@
                     <td></td>
                     
                     <td>-</td>
-                    <td><input type="checkbox" class="box" name="box" checked><label for="box">Box</label><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></td>
+                    <td><div><input type="checkbox" class="box" name="box" checked><label for="box">Box</label></div><div><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label></div><div><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></div></td>
                     <td>57.1</td>
                     <td><button class="discountbtn">+</button></td>
                     <td><button class="freebtn">+</button></td>
                   </tr>
-                    </table>
+                    </tbody>
+</table>
 <div>
-    <h4>Gift Wrap? <span><input type="radio" id="yes" name="giftwrap" value="true"><label for="yes">Yes</label><input type="radio" id="no" name="giftwrap" value="false"><label for="no">No</label></span></h5>
-    <h4>Total Ordered: <span id="totalCount">0</span> (Suggested Quantity Discount Items: <span id="suggestedGifts">0</span>)</h4>
-    <h4>Quantity Discount Items added: <span id="discountCount">0</span></h4>
-    <h2>Total Products: <span id="finalCount">0</span> + Free Gifts: <span id="freeCount">0</span></h2>
+    <h5>Gift Wrap? <span class="giftRadio"><input type="radio" id="yes" name="giftwrap" value="true"><label for="yes">Yes</label></span><span class="giftRadio"><input type="radio" id="no" name="giftwrap" value="false"><label for="no">No</label></span></h5>
+    <h5>Total Ordered: <span id="totalCount">0</span> (Suggested Quantity Discount Items: <span id="suggestedGifts">0</span>)</h5>
+    <h5>Quantity Discount Items added: <span id="discountCount">0</span></h5>
+    <h3>Total Products: <span id="finalCount">0</span> + Free Gifts: <span id="freeCount">0</span></h3>
 </div>
-<button id="generateBtn">Generate Quote</button>
-
+<button id="generateBtn" class="btn btn-primary">Generate Quote</button>
+<script src="./assets/bootstrap/bootstrap.min.js"></script>
 <script src="./src/calculator.js"></script>
 </body>
 

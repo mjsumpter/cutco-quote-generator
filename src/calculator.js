@@ -62,7 +62,7 @@ function addRow(e) {
     }
     else
     {
-        newRow.innerHTML += `<td><input type="checkbox" class="box" name="box"><label for="box">Box</label><input type="checkbox" class="bow" name="bow"><label for="bow">Bow</label><input type="checkbox" class="engraving" name="engraving"><label for="engraving">Engraving</label></td>
+        newRow.innerHTML += `<td><div><input type="checkbox" class="box" name="box"><label for="box">Box</label></div><div><input type="checkbox" class="bow" name="bow"><label for="bow">Bow</label></div><div><input type="checkbox" class="engraving" name="engraving"><label for="engraving">Engraving</label></div></td>
                              <td>0</td>`;
     }            
     newRow.classList = `${productRow.classList.value}`;
@@ -291,7 +291,7 @@ function generateEmail(productArray) {
             productEntry = `<p>${product.quantity} - ${product.color.toUpperCase()} ${product.name} @ Quantity Discount <span class="productTotal">$${(product.quantity * product.fullPrice).toFixed(2)}</span></p>`;
         }
         else if (product.free) {
-            productEntry = `<p>${product.quantity} - ${product.color.toUpperCase()} ${product.name} for your home! <span class="productTotal">$${(product.quantity * product.fullPrice).toFixed(2)}</span></p>`;
+            productEntry = `<p>FREE ${product.quantity} - ${product.color.toUpperCase()} ${product.name} for your home! <span class="productTotal">$${(product.quantity * product.fullPrice).toFixed(2)}</span></p>`;
         }
         else {
             productEntry = `<p>${product.quantity} - ${product.color.toUpperCase()} ${product.name} <span class="productTotal">$${(product.quantity * product.fullPrice).toFixed(2)}</span></p>`;

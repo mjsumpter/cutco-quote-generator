@@ -1,4 +1,35 @@
+body {
+    margin: 30px;
+    padding: 30px;
+}
+
+h1 {
+    padding-bottom: 20px;
+    font-size: 24px;
+}
+
+h2, h3, h4, h5 {
+    padding: 5px 0;
+}
+
+table {
+    width: 90%;
+}
+
 td, th {
 border: solid 1px black;
 text-align: center;
+width: auto;
+}
+
+.options {
+    width: 130px;
+}
+
+.giftRadio {
+    padding: 0 5px;
+}
+
+.productTotal {
+    float: right;
 }

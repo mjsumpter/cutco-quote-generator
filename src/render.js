@@ -54,13 +54,13 @@ function generateTable(productsArray) {
                     <td>${colors.map((key) => {
                         if (key)
                         {
-                            return `<input type="radio" id="${key ? key : '-'}" name="color${i} " value="${key ? key : '-'}">
-                                <label for="${key ? key : '-'}" >${key ? key.charAt(0).toUpperCase() + key.slice(1) : '-'}</label >`
+                            return `<div><input type="radio" id="${key ? key : '-'}" name="color${i} " value="${key ? key : '-'}">
+                                <label for="${key ? key : '-'}" >${key ? key.charAt(0).toUpperCase() + key.slice(1) : '-'}</label></div>`
                         }
                     }).join('')}</td>
                     
                     <td>${product.price ? product.price : '-'}</td>
-                    <td><input type="checkbox" class="box" name="box" checked><label for="box">Box</label><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></td>
+                    <td><div><input type="checkbox" class="box" name="box" checked><label for="box">Box</label></div><div><input type="checkbox" class="bow" name="bow" checked><label for="bow">Bow</label></div><div><input type="checkbox" class="engraving" name="engraving" checked><label for="engraving">Engraving</label></div></td>
                     <td>${product.priceFull}</td>
                     <td><button class="discountbtn">+</button></td>
                     <td><button class="freebtn">+</button></td>
