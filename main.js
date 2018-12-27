@@ -2,7 +2,7 @@ const electron = require("electron");
 const url = require('url');
 const path = require('path');
 
-const {app, BrowserWindow, Menu} = electron;
+const {app, BrowserWindow, Menu, ipcMain} = electron;
 
 //SET ENV -> production
 //process.env.NODE_ENV = 'production';
@@ -13,7 +13,10 @@ let mainWindow;
 app.on('ready', function() {
     //generate HTML
     //create new window
-    mainWindow = new BrowserWindow({});
+    mainWindow = new BrowserWindow({
+        width: 1000,
+        height: 1000
+    });
     // Load html into window
     mainWindow.loadURL(url.format({
         pathname: path.join(__dirname, 'index.html'),
@@ -30,21 +33,78 @@ app.on('ready', function() {
     Menu.setApplicationMenu(mainMenu);
 });
 
-// Create menu template
+function createQuoteWindow(email){
+    //create new window
+    quoteWindow = new BrowserWindow({
+        width: 800,
+        height: 700,
+        title: 'Order Quote'
+    });
+    // Load html into window
+    quoteWindow.loadURL(url.format({
+        pathname: path.join(__dirname, 'quote.html'),
+        protocol:'file:',
+        slashes: true
+    }));
+
+    // Build menu from template
+    const quoteMenu = Menu.buildFromTemplate(quoteMenuTemplate);
+    // Insert menu
+    Menu.setApplicationMenu(quoteMenu);
+
+    // add email html from ipcRenderer
+    quoteWindow.webContents.on('did-finish-load', () => {
+        quoteWindow.webContents.send('email', email);
+    });
+
+    //garbage collection handle
+    quoteWindow.on('close', () => {
+        quoteWindow = null;
+    });
+}
+
+// Catch email
+ipcMain.on('email', function(e, email){
+    createQuoteWindow(email);   
+});
+
+// Create main menu template
 const mainMenuTemplate = [
     {
         label: 'File',
         submenu: [
             {
-                label: 'Add Item'
+                label: 'Clear Page',
+                click(){
+                    //refresh/clear all page content
+                }
             },
             {
-                label: 'Clear Items'
+                label: 'Reload Database',
+                click(){
+                    // run sqltohtml script, reload html
+                }
             },
             {
                 label: 'Quit',
                 accelerator: process.platform == 'darwin' ? 'Command+Q' : 'Ctrl+Q',
                 click(){
+                    app.quit();
+                }
+            }
+        ]
+    }
+];
+
+// Create quote menu template
+const quoteMenuTemplate = [
+    {
+        label: 'File',
+        submenu: [
+            {
+                label: 'Quit',
+                accelerator: process.platform == 'darwin' ? 'Command+Q' : 'Ctrl+Q',
+                click() {
                     app.quit();
                 }
             }

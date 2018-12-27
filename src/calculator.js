@@ -1,4 +1,7 @@
-    // product numbers of items that are in a set - receive different pricing patterns
+const electron = require('electron');
+const {ipcRenderer} = electron;
+
+// product numbers of items that are in a set - receive different pricing patterns
 let setItemNums = [3822, 1851, 3852, 3849, 1849, 3836, 1836, 1850, 3829, 3828, 3826, 3827];
 
 // Element variables
@@ -172,11 +175,12 @@ function freeGiftSuggestion(total) {
 }
 
 
-function generateQuote() {
-
+function generateQuote(e) {
+    e.preventDefault();
     let email = generateEmail(parseSelectedItems(receiveItems()));
     // generate order
     // add quote to html
+    ipcRenderer.send('email', email);
 }
 
 function receiveItems() {
@@ -305,5 +309,6 @@ function generateEmail(productArray) {
     quote += `<p>The Total is $${(order.total + order.shipping).toFixed(2)} + local tax paid over 5 months interest free for a monthly payment of $${((order.total + order.shipping) / 5).toFixed(2)} + local tax. With this quote your cost per gift would be <strong>$${Math.ceil(order.total / (order.totalItems - order.freeItems))}</strong>!</p>`;
     quote += "</div>";
 
-    document.body.innerHTML += quote;
+    return quote;
+    // document.body.innerHTML += quote; for appending html
 }
