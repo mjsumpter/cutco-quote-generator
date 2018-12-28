@@ -1,6 +1,6 @@
-//Testing
+
 const reRender = require('./src/sqlToHtml');
-//end testing
+
 
 const electron = require("electron");
 const url = require('url');

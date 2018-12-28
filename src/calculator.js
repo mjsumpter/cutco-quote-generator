@@ -202,9 +202,9 @@ function parseSelectedItems(selectedItems) {
     var products = [];
 
     function extractColorSelection(product) {
-        for (let i = 0; i < product.children[3].children.length; i += 2) {
-            if (product.children[3].children[i].checked)
-                return product.children[3].children[i].value;
+        for (let i = 0; i < product.children[3].children.length; i += 1) {
+            if(product.children[3].children[i].children[0].checked) // if color is checked
+                return product.children[3].children[i].children[0].value;
         }
         return "";
     }
@@ -296,7 +296,7 @@ function generateEmail(productArray) {
         else {
             productEntry = `<p>${product.quantity} - ${product.color.toUpperCase()} ${product.name} <span class="productTotal">$${(product.quantity * product.fullPrice).toFixed(2)}</span></p>`;
         }
-
+        
         quote += productEntry;
     });
     
