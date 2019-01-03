@@ -310,5 +310,4 @@ function generateEmail(productArray) {
     quote += "</div>";
 
     return quote;
-    // document.body.innerHTML += quote; for appending html
 }
