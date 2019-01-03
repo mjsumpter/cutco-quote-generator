@@ -117,6 +117,21 @@ const quoteMenuTemplate = [
                 }
             }
         ]
+    },
+    {
+        label: 'Edit',
+        submenu: [
+            { 
+                label: "Copy", 
+                accelerator: process.platform == 'darwin' ? 'Command+C' : 'Ctrl+C',
+                selector: "copy:" 
+            },
+            { 
+                label: "Select All", 
+                accelerator: process.platform == 'darwin' ? 'Command+A' : 'Ctrl+A',
+                selector: "selectAll:" 
+            }
+        ]
     }
 ];
 
