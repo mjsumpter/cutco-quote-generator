@@ -282,7 +282,7 @@ function generateEmail(productArray) {
             return -1;
     });
 
-    const header = `<h3>Quote #1 - ${order.itemsOrdered} Gifts w/ ${order.discountItems} additional at Quantity Discount - SAVINGS: ???</h3>`;
+    const header = `<h3 id="quoteHeading">Quote #1 - ${order.itemsOrdered} Gifts w/ ${order.discountItems} additional at Quantity Discount - SAVINGS: ???</h3>`;
     quote += header;
 
     order.products.forEach((product) => {
@@ -306,7 +306,7 @@ function generateEmail(productArray) {
     }
 
     quote += `<p>FLAT RATE SHIPPING<span class="productTotal">$${order.shipping}</span></p>`;
-    quote += `<p>The Total is $${(order.total + order.shipping).toFixed(2)} + local tax paid over 5 months interest free for a monthly payment of $${((order.total + order.shipping) / 5).toFixed(2)} + local tax. With this quote your cost per gift would be <strong>$${Math.ceil(order.total / (order.totalItems - order.freeItems))}</strong>!</p>`;
+    quote += `<p>The Total is $${(order.total + order.shipping).toFixed(2)} + local tax paid over 5 months interest free for a monthly payment of $${((order.total + order.shipping) / 5).toFixed(2)} + local tax. With this quote your cost per gift would be <span id="costPerGift">$${Math.ceil(order.total / (order.totalItems - order.freeItems))}</span>!</p>`;
     quote += "</div>";
 
     return quote;

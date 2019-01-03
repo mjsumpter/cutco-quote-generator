@@ -33,3 +33,14 @@ width: auto;
 .productTotal {
     float: right;
 }
+
+#quoteHeading {
+    text-decoration: underline;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+#costPerGift {
+    color: red;
+    font-weight: 700;
+}
