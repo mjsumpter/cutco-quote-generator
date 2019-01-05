@@ -293,10 +293,10 @@ function generateEmail(productArray) {
     order.products.forEach((product) => {
         let productEntry = "";
         if (product.discount) {
-            productEntry = `<p>${product.quantity} - ${product.color.toUpperCase()} ${product.name} @ Quantity Discount <span class="productTotal">$${(product.quantity * product.fullPrice).toFixed(2)}</span></p>`;
+            productEntry = `<p class="discountQuote">${product.quantity} - ${product.color.toUpperCase()} ${product.name} @ Quantity Discount <span class="productTotal">$${(product.quantity * product.fullPrice).toFixed(2)}</span></p>`;
         }
         else if (product.free) {
-            productEntry = `<p>FREE ${product.quantity} - ${product.color.toUpperCase()} ${product.name} for your home! <span class="productTotal">$${(product.quantity * product.fullPrice).toFixed(2)}</span></p>`;
+            productEntry = `<p class="freeQuote">FREE ${product.quantity} - ${product.color.toUpperCase()} ${product.name} for your home! <span class="productTotal">$${(product.quantity * product.fullPrice).toFixed(2)}</span></p>`;
         }
         else {
             productEntry = `<p>${product.quantity} - ${product.color.toUpperCase()} ${product.name} <span class="productTotal">$${(product.quantity * product.fullPrice).toFixed(2)}</span></p>`;
@@ -315,4 +315,17 @@ function generateEmail(productArray) {
     quote += "</div>";
 
     return quote;
+}
+
+function calculateSavings(orders) {
+    // Parse order into discounted items
+    let discountedItems = [];
+    orders.products.forEach((product) => {
+        if (product.free || product.discount) {
+            discountedItems.push(product);
+        }
+    });
+
+    // calculate difference from full price
+    // return savings
 }

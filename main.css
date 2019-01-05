@@ -44,3 +44,7 @@ width: auto;
     color: red;
     font-weight: 700;
 }
+
+.discountQuote, .freeQuote {
+    color: red;
+}
