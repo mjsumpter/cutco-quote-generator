@@ -1,3 +1,8 @@
+//GOALS FOR IMPROVEMENT
+// MODULARIZE CALCULATOR MORE
+// ADD SAVINGS
+// ADD MORE STYLING
+
 const electron = require('electron');
 const {ipcRenderer} = electron;
 
