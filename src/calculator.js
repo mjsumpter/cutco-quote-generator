@@ -183,7 +183,6 @@ function freeGiftSuggestion(total) {
 function generateQuote(e) {
     e.preventDefault();
     let email = generateEmail(parseSelectedItems(receiveItems()));
-    // generate order
     // add quote to html
     ipcRenderer.send('email', email);
 }
@@ -221,6 +220,10 @@ function parseSelectedItems(selectedItems) {
             return false;
     }
 
+    function fetchOriginalPrice(product) {
+        // need to embed original price in html?
+    }
+
     selectedItems.forEach((product) => {
         var newProduct = {
             name: product.children[2].innerText,
@@ -230,6 +233,7 @@ function parseSelectedItems(selectedItems) {
             fullPrice: Number(product.children[6].innerText),
             free: freeOrDiscount(product, "free"),
             discount: freeOrDiscount(product, "discount"),
+            //originalPrice: fetchOriginalPrice(product)
         };
         newProduct.total = newProduct.fullPrice * newProduct.quantity;
         products.push(newProduct);
