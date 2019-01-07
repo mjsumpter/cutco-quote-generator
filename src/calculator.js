@@ -116,7 +116,7 @@ function inputEvent(e)
 
 
 function adjustPrice(event) {
-    let currentItemNum = Number(event.target.parentElement.parentElement.id);
+    let currentItemNum = Number(event.target.parentElement.parentElement.parentElement.id);
     let set = setItemNums.includes(currentItemNum);
 
     let target = event.target.classList.value;
@@ -147,7 +147,7 @@ function adjustPrice(event) {
             break;
     }
     let adjustment = event.srcElement.checked ? value : -1 * value;
-    let priceElement = event.target.parentElement.parentElement.children[6];
+    let priceElement = event.target.parentElement.parentElement.parentElement.children[6];
     let price = Number(priceElement.innerHTML);
     price += adjustment;
     priceElement.innerHTML = price;
@@ -229,7 +229,7 @@ function parseSelectedItems(selectedItems) {
             price: Number(product.children[4].innerText),
             fullPrice: Number(product.children[6].innerText),
             free: freeOrDiscount(product, "free"),
-            discount: freeOrDiscount(product, "discount")
+            discount: freeOrDiscount(product, "discount"),
         };
         newProduct.total = newProduct.fullPrice * newProduct.quantity;
         products.push(newProduct);
@@ -288,7 +288,7 @@ function generateEmail(productArray) {
             return -1;
     });
 
-    const header = `<h3 id="quoteHeading">Quote #1 - ${order.itemsOrdered} Gifts w/ ${order.discountItems} additional at Quantity Discount - SAVINGS: ${order.savings}</h3>`;
+    const header = `<h3 id="quoteHeading">Quote #1 - ${order.itemsOrdered} Gifts w/ ${order.discountItems} additional at Quantity Discount - SAVINGS: $${order.savings}</h3>`;
     quote += header;
 
     order.products.forEach((product) => {
