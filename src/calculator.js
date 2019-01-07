@@ -264,6 +264,7 @@ function generateEmail(productArray) {
         order.total += Number(product.quantity * product.fullPrice);
     });
     order.totalItems = order.itemsOrdered + order.discountItems + order.freeItems;
+    order.savings = calculateSavings(order.products);
 
     /* Sort Products in following order: Ordered, Quantity Discount, Free */
     order.products.sort( (a, b) => {
@@ -287,7 +288,7 @@ function generateEmail(productArray) {
             return -1;
     });
 
-    const header = `<h3 id="quoteHeading">Quote #1 - ${order.itemsOrdered} Gifts w/ ${order.discountItems} additional at Quantity Discount - SAVINGS: ???</h3>`;
+    const header = `<h3 id="quoteHeading">Quote #1 - ${order.itemsOrdered} Gifts w/ ${order.discountItems} additional at Quantity Discount - SAVINGS: ${order.savings}</h3>`;
     quote += header;
 
     order.products.forEach((product) => {
@@ -318,14 +319,26 @@ function generateEmail(productArray) {
 }
 
 function calculateSavings(orders) {
+    let savings = 0;
     // Parse order into discounted items
     let discountedItems = [];
-    orders.products.forEach((product) => {
+    orders.forEach((product) => {
         if (product.free || product.discount) {
             discountedItems.push(product);
         }
     });
 
     // calculate difference from full price
+    discountedItems.forEach((product) => {
+        if (product.discount)
+        {
+            savings += product.price;
+        }
+        else if (product.free)
+        {
+            savings += product.fullPrice;
+        }
+    });
     // return savings
+    return savings;
 }
