@@ -71,6 +71,7 @@ function addRow(e) {
                              <td>0</td>`;
     }            
     newRow.classList = `${productRow.classList.value}`;
+    newRow.children[6].classList = `${productRow.children[6].classList.value}`;
     newRow.id = `${productRow.id}-${buttonClicked}`;
     // push new row elements onto row arrays
     inputs.push(newRow.querySelector('input[type=number]'));
@@ -221,7 +222,8 @@ function parseSelectedItems(selectedItems) {
     }
 
     function fetchOriginalPrice(product) {
-        // need to embed original price in html?
+        let originalPrice = Number(product.children[6].classList.value);
+        return originalPrice;
     }
 
     selectedItems.forEach((product) => {
@@ -233,7 +235,7 @@ function parseSelectedItems(selectedItems) {
             fullPrice: Number(product.children[6].innerText),
             free: freeOrDiscount(product, "free"),
             discount: freeOrDiscount(product, "discount"),
-            //originalPrice: fetchOriginalPrice(product)
+            originalPrice: fetchOriginalPrice(product)
         };
         newProduct.total = newProduct.fullPrice * newProduct.quantity;
         products.push(newProduct);
@@ -334,14 +336,8 @@ function calculateSavings(orders) {
 
     // calculate difference from full price
     discountedItems.forEach((product) => {
-        if (product.discount)
-        {
-            savings += product.price;
-        }
-        else if (product.free)
-        {
-            savings += product.fullPrice;
-        }
+        console.log(`original price: ${product.originalPrice} - fullprice: ${product.fullPrice}`);
+        savings += product.originalPrice - product.fullPrice;
     });
     // return savings
     return savings;
