@@ -36,13 +36,14 @@ engravingCheck.forEach(btn => btn.addEventListener("change", adjustPrice));
 // Functions
 
 /************************************************************
- * Add check box listeners
+ * Adds a row to the html
  * */
 function addRow(e) {
     let productRow = e.target.parentElement.parentElement;
     let newRow = document.createElement('tr');
     let buttonClicked = e.target.classList.value.replace('btn', "");
 
+    // generate newRow html using some properties from parent row
     newRow.innerHTML = `
                 <th><input type="checkbox" name="${productRow.children[0].firstElementChild.name}" class="selection"></th>
                 <th><input type="number" name="quantity" min="0" class="${buttonClicked}"></th>
@@ -50,6 +51,7 @@ function addRow(e) {
                 <td>-</td>
                 <td>0</td>
                 `;
+    // if the discount button is clicked, determine if it is part of a set or not
     if (buttonClicked === "discount")
     {
         let itemNum = Number(e.target.parentElement.parentElement.id);
@@ -69,7 +71,8 @@ function addRow(e) {
     {
         newRow.innerHTML += `<td><div><input type="checkbox" class="box" name="box"><label for="box">Box</label></div><div><input type="checkbox" class="bow" name="bow"><label for="bow">Bow</label></div><div><input type="checkbox" class="engraving" name="engraving"><label for="engraving">Engraving</label></div></td>
                              <td>0</td>`;
-    }            
+    }
+    // assign html properties from parent row to new row            
     newRow.classList = `${productRow.classList.value}`;
     newRow.children[6].classList = `${productRow.children[6].classList.value}`;
     newRow.id = `${productRow.id}-${buttonClicked}`;
@@ -87,6 +90,8 @@ function addRow(e) {
     productRow.insertAdjacentElement('afterend', newRow);
 }
 
+// When the quantity of an item is changed, check the corresponding box and add
+// number of items selected to corresponding counter (discount, free, total)
 function inputEvent(e)
 {
     if (e.target.value > 0) {
@@ -115,7 +120,7 @@ function inputEvent(e)
     finalHtml.innerHTML = finalNum;
 }
 
-
+// adjusts the listed final price based on weather box, bow, or engraving is checked
 function adjustPrice(event) {
     let currentItemNum = Number(event.target.parentElement.parentElement.parentElement.id);
     let set = setItemNums.includes(currentItemNum);
@@ -147,6 +152,7 @@ function adjustPrice(event) {
             }
             break;
     }
+    // adjustment - if checked, add value. if not, subtract it
     let adjustment = event.srcElement.checked ? value : -1 * value;
     let priceElement = event.target.parentElement.parentElement.parentElement.children[6];
     let price = Number(priceElement.innerHTML);
@@ -154,6 +160,8 @@ function adjustPrice(event) {
     priceElement.innerHTML = price;
 }
 
+// total -> number of full value products selected
+// returns number of suggested quantity discount items
 function freeGiftSuggestion(total) {
     if (total >= 15 && total < 25) {
         return 1;
@@ -180,15 +188,18 @@ function freeGiftSuggestion(total) {
         return 0;
 }
 
-
+// generates the email quote and pushes it to electron
 function generateQuote(e) {
     e.preventDefault();
     let email = generateEmail(parseSelectedItems(receiveItems()));
-    // add quote to html
+    // add quote to html with electron
     ipcRenderer.send('email', email);
 }
 
+// pulls selected items from dom for processing
+// return array of row elements
 function receiveItems() {
+    // checked contains checked checkbox elements
     let checked = [];
     document.querySelectorAll('.selection').forEach((row) => {
         if (row.checked)
@@ -196,6 +207,7 @@ function receiveItems() {
             checked.push(row);
         }
     });
+    // checkedItems contain full row elements
     let checkedItems = [];
     checked.forEach((item) => {
         checkedItems.push(item.parentElement.parentElement);
@@ -203,6 +215,8 @@ function receiveItems() {
     return checkedItems;
 }
 
+// selectedItems -> array of row elements corresponding to desired products
+// parses each row into product object, places all objects into an array and returns product array
 function parseSelectedItems(selectedItems) {
     var products = [];
 
@@ -243,19 +257,23 @@ function parseSelectedItems(selectedItems) {
     return products;
 }
 
+// productArray -> array of products. product objects created in parseSelectedItems()
+// generates html for email template from product array
+// returns html as string
 function generateEmail(productArray) {
     let quote = "<div id='quote'>";
     const giftWrapSelection = document.querySelector('#yes');
     const order = {
-        itemsOrdered: 0,
-        freeItems: 0,
-        discountItems: 0,
-        totalItems: 0,
-        products: [],
-        shipping: 62,
-        giftWrap: giftWrapSelection.checked,
-        total: 0
+        itemsOrdered: 0,                        // items ordered by customer at full price
+        freeItems: 0,                           // num of free products
+        discountItems: 0,                       // num of quantity discounted products
+        totalItems: 0,                          // total items in order -> itemsOrdered + freeItems + discountItems
+        products: [],                           // array of all products
+        shipping: 62,                           // flat rate cost of shipping
+        giftWrap: giftWrapSelection.checked,    // boolean - items gift wrapped?
+        total: 0                                // total cost of order
     };
+    // load product quantities into order object
     productArray.forEach((product) => {
         order.products.push(product);
         if (product.discount) {
@@ -270,6 +288,7 @@ function generateEmail(productArray) {
         order.total += Number(product.quantity * product.fullPrice);
     });
     order.totalItems = order.itemsOrdered + order.discountItems + order.freeItems;
+    // creates new order property -> the amount of savings the customer receives from free and discount items
     order.savings = calculateSavings(order.products);
 
     /* Sort Products in following order: Ordered, Quantity Discount, Free */
@@ -297,6 +316,7 @@ function generateEmail(productArray) {
     const header = `<h3 id="quoteHeading">Quote #1 - ${order.itemsOrdered} Gifts w/ ${order.discountItems} additional at Quantity Discount - SAVINGS: $${order.savings}</h3>`;
     quote += header;
 
+    // generates different html depending on the discount/free status of each product
     order.products.forEach((product) => {
         let productEntry = "";
         if (product.discount) {
@@ -312,6 +332,7 @@ function generateEmail(productArray) {
         quote += productEntry;
     });
     
+    // adds html if the order will be gift wrapped
     if (order.giftWrap) {
         order.total += (order.totalItems - order.freeItems) * 5;
         quote += `<p>${order.totalItems - order.freeItems} - Gift Wraps<span class="productTotal">$${5 * (order.totalItems - order.freeItems)}</span></p>`;
@@ -324,6 +345,9 @@ function generateEmail(productArray) {
     return quote;
 }
 
+// orders -> takes in an array of all products
+// calculates how much order savings
+// returns savings value
 function calculateSavings(orders) {
     let savings = 0;
     // Parse order into discounted items
