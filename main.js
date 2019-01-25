@@ -103,22 +103,6 @@ const mainMenuTemplate = [
         }
       }
     ]
-  }
-];
-
-// Create quote menu template
-const quoteMenuTemplate = [
-  {
-    label: "File",
-    submenu: [
-      {
-        label: "Quit",
-        accelerator: process.platform == "darwin" ? "Command+Q" : "Ctrl+Q",
-        click() {
-          quoteWindow.close();
-        }
-      }
-    ]
   },
   {
     label: "Edit",
@@ -135,6 +119,38 @@ const quoteMenuTemplate = [
       }
     ]
   }
+];
+
+// Create quote menu template
+const quoteMenuTemplate = [
+  {
+    label: "File",
+    submenu: [
+      {
+        label: "Quit",
+        accelerator: process.platform == "darwin" ? "Command+Q" : "Ctrl+Q",
+        click() {
+          quoteWindow.close();
+        }
+      }
+    ]
+  }
+  // Not working on Mac, so moved to main menu rather than sub menu for now
+  // {
+  //   label: "Edit",
+  //   submenu: [
+  //     {
+  //       label: "Copy",
+  //       accelerator: process.platform == "darwin" ? "Command+C" : "Ctrl+C",
+  //       selector: "copy:"
+  //     },
+  //     {
+  //       label: "Select All",
+  //       accelerator: process.platform == "darwin" ? "Command+A" : "Ctrl+A",
+  //       selector: "selectAll:"
+  //     }
+  //   ]
+  // }
 ];
 
 // if mac, add empty object to menu
